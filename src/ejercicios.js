@@ -13,7 +13,11 @@ export const fibo = (n, memo = {}) => {
 export const factorial = (n, memo = {}) => {
   if (n in memo) return memo[n];
   if (n <= 0) return 1;
-  if (n >= 1) return n * factorial(n - 1, memo);
+
+  if (n >= 1) {
+    memo[n] = n * factorial(n - 1, memo);
+    return memo[n];
+  }
 };
 
 export const multiplicacion = "???";
