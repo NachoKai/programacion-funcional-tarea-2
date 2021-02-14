@@ -20,7 +20,9 @@ export const factorial = (n, memo = {}) => {
   }
 };
 
-export const multiplicacion = "???";
+export const multiplicacion = arr => {
+  return arr.reduce((n, acc) => n * acc);
+};
 
 // Funciones de lodash/fp que les pueden ser útiles a partir de este punto:
 // Las vistas en la clase (particularmente fp.flow y fp.curry)
