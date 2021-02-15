@@ -10,30 +10,26 @@ export const fibo = (n, memo = {}) => {
   }
 };
 
-export const factorial = (n, memo = {}) => {
-  if (n in memo) return memo[n];
-  if (n <= 0) return 1;
-
-  if (n >= 1) {
-    memo[n] = n * factorial(n - 1, memo);
-    return memo[n];
-  }
+export const factorial = n => {
+  if (n <= 1) return 1;
+  return n * factorial(n - 1);
 };
 
-export const multiplicacion = arr => {
-  return arr.reduce((n, acc) => n * acc);
-};
+export const multiplicacion = arr => arr.reduce((num, acc) => num * acc, 1);
 
-// Funciones de lodash/fp que les pueden ser útiles a partir de este punto:
-// Las vistas en la clase (particularmente fp.flow y fp.curry)
-// fp.sortBy (para ordenar un array)
-// fp.reverse (para dar vuelta un array)
-// fp.first (para obtener el primer valor de un array)
+export const atributo = str => obj => obj[str];
 
-export const atributo = "???";
+export const multiplicarAtributo = fp.curry((str, obj) =>
+  multiplicacion(atributo(str)(obj))
+);
 
-export const multiplicarAtributo = "???";
+export const ordenarPor = fp.curry((str, arr) =>
+  fp.reverse(fp.sortBy(atributo(str), arr))
+);
 
-export const ordenarPor = "???";
-
-export const mayorPersona = "???";
+export const mayorPersona = fp.flow(
+  fp.sortBy("edad"),
+  fp.reverse,
+  fp.first,
+  atributo("nombre")
+);
